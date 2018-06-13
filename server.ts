@@ -3,32 +3,26 @@ import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
 import * as express from 'express';
-import { join } from 'path';
+import * as path from 'path';
 import { ngExpressEngine } from '@nguniversal/express-engine';
+import { AppServerModuleNgFactory } from './dist/ssr-playground-server/main';
 
-// Express server
 const app = express();
-
-const PORT = process.env.PORT || 4000;
-const DIST_FOLDER = join(process.cwd(), 'dist');
-
-const { AppServerModuleNgFactory } = require('./dist/ssr-playground-server/main');
+const distFolder = path.join(process.cwd(), 'dist', 'ssr-playground');
 
 app.engine('html', ngExpressEngine({
   bootstrap: AppServerModuleNgFactory
 }));
 
 app.set('view engine', 'html');
-app.set('views', join(DIST_FOLDER, 'ssr-playground'));
+app.set('views', distFolder);
 
 // Serve static files
-// app.get('*.*', express.static(join(DIST_FOLDER, 'ssr-playground')));
+app.get('*.*', express.static(distFolder));
 
-// All regular routes use the Universal engine
+// Universal engine
 app.get('*', (req, res) => {
   res.render('index', { req });
 });
 
-app.listen(PORT, () => {
-  console.log(`Node server listening on http://localhost:${PORT}`);
-});
+app.listen(4000, () => console.log('Running on http://localhost:4000'));

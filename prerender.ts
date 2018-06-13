@@ -3,15 +3,12 @@ import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
 import * as express from 'express';
-import { join } from 'path';
-import { readFileSync } from 'fs';
+import * as mkdirp from 'mkdirp';
+import * as path from 'path';
+import * as fs from 'fs';
+
 import { renderModuleFactory } from '@angular/platform-server';
-import { renderModuleFactoryMany } from './server-utils';
-
-
-const DIST_FOLDER = join(process.cwd(), 'dist');
-
-const { AppServerModuleNgFactory } = require('./dist/ssr-playground-server/main');
+import { AppServerModuleNgFactory } from './dist/ssr-playground-server/main';
 
 const routes = [
   '/',
@@ -19,8 +16,19 @@ const routes = [
   '/item/bed',
   '/item/book',
   '/item/garden',
+  '/item/fridge'
 ];
 
-renderModuleFactoryMany(AppServerModuleNgFactory, {
-  document: readFileSync(join(DIST_FOLDER, 'ssr-playground', 'index.html')).toString()
-}, routes).then(html => console.log(html));
+const distFolder = path.join(process.cwd(), 'dist', 'ssr-playground');
+const indexHtml = fs.readFileSync(path.join(distFolder, 'index.html')).toString();
+
+routes.forEach(route => renderRoute(indexHtml, route));
+
+
+async function renderRoute(document: string, route: string) {
+  const html = await renderModuleFactory(AppServerModuleNgFactory, { document, url: route });
+
+  const folder = path.join(distFolder, route);
+  mkdirp.sync(folder);
+  fs.writeFileSync(path.join(folder, 'index.html'), html);
+}
