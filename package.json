@@ -25,6 +25,7 @@
     "@angular/platform-server": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@nguniversal/express-engine": "^6.0.0",
+    "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
     "mkdirp": "^0.5.1",
     "promise-serial": "^0.1.5",

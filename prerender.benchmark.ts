@@ -21,7 +21,9 @@ const routesSet = [
   '/item/bed',
   '/item/book',
   '/item/garden',
-  '/item/fridge'
+  '/item/fridge',
+  '/item/computer',
+  '/item/livingroom'
 ];
 
 // build list of 600 routes

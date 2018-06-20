@@ -11,7 +11,9 @@ export class ItemService {
     { id: 'book', title: 'Book', description: 'Pages full of knowledge' },
     { id: 'fridge', title: 'Fridge', description: 'Delicious food behind a door' },
     { id: 'bed', title: 'Bed', description: 'Rest and reload from coding' },
-    { id: 'garden', title: 'Garden', description: 'Flowers, grass and barbecue' }
+    { id: 'garden', title: 'Garden', description: 'Flowers, grass and barbecue' },
+    { id: 'computer', title: 'Computer', description: 'Code, code, code...' },
+    { id: 'livingroom', title: 'Livingroom', description: 'It\'s where your TV lives' }
   ];
 
   constructor() { }
