@@ -1,13 +1,5 @@
-<div class="card">
-  <div class="card-body bg-light">
-    <div class="card-title">
-      <h4>{{ item.title }} <small><code>{{ item.id }}</code></small></h4>
-    </div>
-    <p>
-      {{ item.description }}
-    </p>
-    <a class="btn btn-outline-primary btn-sm" [routerLink]="['/item', item.id]">Go to details page</a>
-  </div>
-</div>
+<h4>{{ item.title }} <small><code>{{ item.id }}</code></small></h4>
+<p>{{ item.description }}</p>
 
+<a [routerLink]="['/item', item.id]">Go to details page</a>
 
