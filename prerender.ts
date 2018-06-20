@@ -8,6 +8,10 @@ import * as fs from 'fs';
 import { renderModuleFactory } from '@angular/platform-server';
 import { AppServerModuleNgFactory } from './dist/ssr-playground-server/main';
 
+const distFolder = path.join(process.cwd(), 'dist', 'ssr-playground');
+const indexHtml = fs.readFileSync(path.join(distFolder, 'index.html')).toString();
+
+
 const routes = [
   '/',
   '/dashboard',
@@ -18,9 +22,6 @@ const routes = [
   '/item/computer',
   '/item/livingroom'
 ];
-
-const distFolder = path.join(process.cwd(), 'dist', 'ssr-playground');
-const indexHtml = fs.readFileSync(path.join(distFolder, 'index.html')).toString();
 
 // Run the render process for each of the routes
 routes.forEach(route => renderRoute(indexHtml, route));
