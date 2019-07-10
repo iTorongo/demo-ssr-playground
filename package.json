@@ -7,10 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "server:build": "npm run build && ng run ssr-playground:server",
-    "prerender:build": "npm run server:build && webpack --config webpack.server.config.js --progress --colors",
-    "prerender:run": "node dist/prerender.js"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

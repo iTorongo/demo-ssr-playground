@@ -5,13 +5,12 @@ import * as mkdirp from 'mkdirp';
 import * as path from 'path';
 import * as fs from 'fs';
 
-import { renderModuleFactory } from '@angular/platform-server';
-import { AppServerModuleNgFactory } from './dist/ssr-playground-server/main';
+const { AppServerModuleNgFactory, renderModuleFactory, provideModuleMap, LAZY_MODULE_MAP } = require('./dist/server/main');
 
-const distFolder = path.join(process.cwd(), 'dist', 'ssr-playground');
+const distFolder = path.join(process.cwd(), 'dist', 'browser');
 const indexHtml = fs.readFileSync(path.join(distFolder, 'index.html')).toString();
 
-
+// List of all routes we want to prerender
 const routes = [
   '/',
   '/dashboard',
@@ -29,7 +28,15 @@ routes.forEach(route => renderRoute(indexHtml, route));
 // This is the function that does the rendering
 // and saves the result to the file system
 async function renderRoute(document: string, route: string) {
-  const html = await renderModuleFactory(AppServerModuleNgFactory, { document, url: route });
+  const html = await renderModuleFactory(
+    AppServerModuleNgFactory,
+    {
+      document,
+      url: route,
+      extraProviders: [
+        provideModuleMap(LAZY_MODULE_MAP)
+      ]
+    });
 
   const folder = path.join(distFolder, route);
   mkdirp.sync(folder);
