@@ -7,7 +7,9 @@ module.exports = {
   mode: 'none',
   entry: {
     // This is our Express server for Dynamic universal
-    server: './server.ts'
+    server: './server.ts',
+    // Prerendering script
+    prerender: './prerender.ts'
   },
   externals: {
     './dist/server/main': 'require("./server/main")'
