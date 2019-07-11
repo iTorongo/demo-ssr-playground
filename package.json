@@ -7,8 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "compile:prerender": "webpack --config webpack.prerender.config.js --progress --colors"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
