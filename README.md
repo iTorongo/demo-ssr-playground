@@ -61,11 +61,13 @@ Open your browser at [http://localhost:4000](http://localhost:4000) to see it in
 #### Pre-rendering
 
 As for the SSR server, we need to bundle the pre-rendering script `prerender.ts` with Webpack.
+This is done with the same Webpack config and build command as for the server:
 
 ```bash
-npm run compile:prerender
+npm run compile:server
 ```
 
+It produces a `prerender.js` file in the `dist` folder.
 Now run the pre-rendering build that produces static HTML files:
 
 ```bash
@@ -73,14 +75,14 @@ node dist/prerender
 ```
 
 You should now find some subfolders in the `dist/browser` directory, according to the routes of the application.
-Run a local web server there, e.g. `http-server`:
+Run a local web server there, e.g. `angular-http-server`:
 
 ```bash
 cd dist/browser
-npx http-server
+npx angular-http-server
 
-# OR if you have http-server installed globally
-http-server
+# OR if you have angular-http-server installed globally
+angular-http-server
 ```
 
 Open your browser at [http://localhost:8080](http://localhost:8080).
