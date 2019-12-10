@@ -161,7 +161,12 @@
           "options": {
             "browserTarget": "ssr-playground:build:production",
             "serverTarget": "ssr-playground:server:production",
-            "routes": []
+            "routes": [
+              "/items",
+              "/items/bed",
+              "/items/fridge",
+              "/items/book"
+            ]
           }
         }
       }
