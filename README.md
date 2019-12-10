@@ -23,13 +23,14 @@ ng run ssr-playground:server:production --bundleDependencies all
 
 
 # OR both together
-npm run build:client-and-server-bundles
+npm run build:ssr
 ```
 
 You should now find a `dist` folder with two sub-directories:
 
 ```
 - dist
+  - ssr-playground
     - browser
     - server
 ```
@@ -39,12 +40,7 @@ We can take a look at the server now!
 ### Compiling the server for SSR
 
 The server part is a TypeScript program for Node.js in the `server.ts` file.
-In order to bring everything together, we need to bundle the server application using webpack.
-Everything is already prepared as NPM run scripts:
-
-```bash
-npm run compile:server
-```
+It is already bundled with the application in `dist/ssr-playground/server/main.js` after running `npm run build:ssr`.
 
 
 ### Running Server-side rendering
@@ -52,7 +48,9 @@ npm run compile:server
 Run the Express server with live server-side rendering:
 
 ```bash
-node dist/server/main
+node dist/ssr-playgroun/server/main
+# OR
+npm run serve:ssr
 ```
 
 Open your browser at [http://localhost:4000](http://localhost:4000) to see it in action. When you show the source code in the browser you should see the server-side rendered HTML.
@@ -66,14 +64,11 @@ npm run prerender
 ```
 
 You should now find some subfolders in the `dist/browser` directory, according to the routes of the application.
-Run a local web server there, e.g. `http-server`:
+Run a local web server there, e.g. `angular-http-server`:
 
 ```bash
-cd dist/browser
+cd dist/ssr-playground/browser
 npx http-server
-
-# OR if you have http-server installed globally
-http-server
 ```
 
 Open your browser at [http://localhost:8080](http://localhost:8080).
